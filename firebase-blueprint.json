@@ -1,0 +1,202 @@
+{
+  "$schema": "https://firebase.google.com/schemas/firestore-blueprint.json",
+  "entities": {
+    "User": {
+      "collection": "users",
+      "fields": {
+        "id": { "type": "string", "description": "Auth UID" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "school": { "type": "string" },
+        "campus": { "type": "string" },
+        "faculty": { "type": "string" },
+        "department": { "type": "string" },
+        "level": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "isVerified": { "type": "boolean" },
+        "role": { "type": "string", "description": "'student' or 'admin'" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "dealsCompleted": { "type": "number" },
+        "joinedDate": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "verificationStatus": { "type": "string", "description": "'unverified' | 'pending' | 'verified' | 'rejected'" }
+      }
+    },
+    "Institution": {
+      "collection": "institutions",
+      "fields": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "shortName": { "type": "string" },
+        "category": { "type": "string" },
+        "type": { "type": "string" },
+        "state": { "type": "string" },
+        "geoZone": { "type": "string" },
+        "campuses": { "type": "array" },
+        "faculties": { "type": "array" },
+        "departments": { "type": "array" },
+        "programmes": { "type": "array" },
+        "meetupPoints": { "type": "array" },
+        "isActive": { "type": "boolean" }
+      }
+    },
+    "Listing": {
+      "collection": "listings",
+      "fields": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "category": { "type": "string" },
+        "itemType": { "type": "string", "description": "'product' or 'service'" },
+        "condition": { "type": "string" },
+        "images": { "type": "array" },
+        "sellerId": { "type": "string" },
+        "sellerName": { "type": "string" },
+        "sellerSchool": { "type": "string" },
+        "sellerCampus": { "type": "string" },
+        "sellerPhone": { "type": "string" },
+        "sellerIsVerified": { "type": "boolean" },
+        "sellerRating": { "type": "number" },
+        "status": { "type": "string", "description": "'active' | 'paused' | 'sold' | 'removed'" },
+        "quantity": { "type": "number" },
+        "meetupPoints": { "type": "array" },
+        "isPromoted": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Order": {
+      "collection": "orders",
+      "fields": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "productId": { "type": "string" },
+        "productTitle": { "type": "string" },
+        "productImage": { "type": "string" },
+        "buyerId": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "buyerPhone": { "type": "string" },
+        "buyerSchool": { "type": "string" },
+        "sellerId": { "type": "string" },
+        "sellerName": { "type": "string" },
+        "sellerPhone": { "type": "string" },
+        "sellerSchool": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unitPrice": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "protectionFee": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string" },
+        "paymentReference": { "type": "string" },
+        "status": { "type": "string", "description": "'pending' | 'payment_processing' | 'paid' | 'seller_confirmed' | 'ready_for_pickup' | 'out_for_delivery' | 'completed' | 'cancelled' | 'refunded'" },
+        "meetupLocation": { "type": "string" },
+        "meetupDate": { "type": "string" },
+        "handoverCode": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Conversation": {
+      "collection": "conversations",
+      "fields": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "productTitle": { "type": "string" },
+        "productPrice": { "type": "number" },
+        "productImage": { "type": "string" },
+        "participants": { "type": "array" },
+        "participantNames": { "type": "object" },
+        "participantAvatars": { "type": "object" },
+        "lastMessage": { "type": "string" },
+        "lastMessageTime": { "type": "string" },
+        "lastSenderId": { "type": "string" },
+        "unreadCount": { "type": "object" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Message": {
+      "collection": "conversations/{conversationId}/messages",
+      "fields": {
+        "id": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "image": { "type": "string" },
+        "isOffer": { "type": "boolean" },
+        "offerAmount": { "type": "number" },
+        "offerStatus": { "type": "string" },
+        "read": { "type": "boolean" },
+        "timestamp": { "type": "string" }
+      }
+    },
+    "Review": {
+      "collection": "reviews",
+      "fields": {
+        "id": { "type": "string" },
+        "orderId": { "type": "string" },
+        "buyerId": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "sellerId": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "Notification": {
+      "collection": "notifications",
+      "fields": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "linkId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "Report": {
+      "collection": "reports",
+      "fields": {
+        "id": { "type": "string" },
+        "reporterId": { "type": "string" },
+        "reporterName": { "type": "string" },
+        "targetType": { "type": "string", "description": "'listing' | 'user' | 'message' | 'review'" },
+        "targetId": { "type": "string" },
+        "targetTitle": { "type": "string" },
+        "reason": { "type": "string" },
+        "details": { "type": "string" },
+        "status": { "type": "string", "description": "'pending' | 'resolved' | 'dismissed'" },
+        "actionTaken": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "VerificationRequest": {
+      "collection": "verificationRequests",
+      "fields": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "school": { "type": "string" },
+        "programme": { "type": "string" },
+        "faculty": { "type": "string" },
+        "department": { "type": "string" },
+        "level": { "type": "string" },
+        "matricNumber": { "type": "string" },
+        "idCardUrl": { "type": "string" },
+        "status": { "type": "string", "description": "'pending' | 'verified' | 'rejected'" },
+        "adminNotes": { "type": "string" },
+        "submittedAt": { "type": "string" },
+        "reviewedAt": { "type": "string" }
+      }
+    }
+  }
+}
