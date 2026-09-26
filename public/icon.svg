@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="50%" stop-color="#065f46" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+
+  <!-- Subtle glow inner circle -->
+  <circle cx="256" cy="256" r="190" fill="#10B981" opacity="0.12" />
+
+  <!-- Shield / Shopping Base with shadow -->
+  <g filter="url(#shadow)">
+    <!-- Graduation Cap Roof -->
+    <path d="M 256 120 L 400 188 L 256 256 L 112 188 Z" fill="white" />
+    <path d="M 256 256 L 400 188 L 380 230 L 256 288 L 132 230 L 112 188 Z" fill="#E2E8F0" />
+    
+    <!-- Tassel -->
+    <path d="M 370 196 L 390 270 L 402 270 L 382 196 Z" fill="url(#gold)" />
+    <circle cx="396" cy="285" r="10" fill="url(#gold)" />
+    
+    <!-- Shopping Bag / Marketplace Plug Body -->
+    <rect x="156" y="270" width="200" height="150" rx="24" fill="white" />
+    
+    <!-- Bag handles -->
+    <path d="M 200 270 V 230 C 200 200 312 200 312 230 V 270" stroke="white" stroke-width="16" stroke-linecap="round" fill="none"/>
+
+    <!-- Lightning / Plug Symbol in Gold inside bag -->
+    <path d="M 264 290 L 224 350 L 254 350 L 244 405 L 290 338 L 260 338 Z" fill="url(#gold)" />
+  </g>
+
+  <!-- Small Nigerian flag ribbon dot at bottom center -->
+  <g transform="translate(236, 442)">
+    <rect x="0" y="0" width="13" height="18" rx="2" fill="#008751" />
+    <rect x="13" y="0" width="14" height="18" fill="#FFFFFF" />
+    <rect x="27" y="0" width="13" height="18" rx="2" fill="#008751" />
+  </g>
+</svg>

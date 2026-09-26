@@ -19,8 +19,11 @@ import {
   ShieldAlert,
   Ban,
   UserX,
-  LogIn
+  LogIn,
+  Smartphone,
+  Download
 } from 'lucide-react';
+import { usePWAInstall } from '../hooks/usePWAInstall';
 import { useMarket } from '../context/MarketContext';
 import { ProductCard } from './ProductCard';
 import { OrdersView } from './OrdersView';
@@ -59,6 +62,9 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
     signOutUser,
     sendPasswordReset
   } = useMarket();
+
+  const { isInstallable, isInstalled, install, isIOS } = usePWAInstall();
+  const [showInstallHelp, setShowInstallHelp] = useState(false);
 
   const [activeSubSection, setActiveSubSection] = useState<'favourites' | 'orders' | 'seller_hub' | 'security' | 'settings'>('favourites');
 
@@ -525,6 +531,64 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                 </button>
               )}
             </div>
+          </div>
+
+          {/* Mobile App Installation (PWA / Offline) */}
+          <div className="bg-gradient-to-br from-emerald-50 to-teal-50/50 p-5 rounded-3xl border border-emerald-200/80 space-y-3">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                  <Smartphone className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm text-emerald-950">StudentPlug Phone App</h3>
+                  <p className="text-xs text-emerald-700">Add to Home Screen for fast, full-screen offline access.</p>
+                </div>
+              </div>
+              {isInstalled ? (
+                <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-300">
+                  Installed
+                </span>
+              ) : (
+                <span className="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full border border-amber-300">
+                  Available
+                </span>
+              )}
+            </div>
+
+            <div className="pt-2 border-t border-emerald-200/60 flex items-center justify-between flex-wrap gap-2">
+              <span className="text-xs text-emerald-800">
+                {isInstalled ? 'App is active on your device.' : 'Runs full-screen with instant load speeds.'}
+              </span>
+              {!isInstalled && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    if (isIOS || !isInstallable) {
+                      setShowInstallHelp(!showInstallHelp);
+                    } else {
+                      const ok = await install();
+                      if (ok) showToast('StudentPlug App installed on your device!');
+                    }
+                  }}
+                  className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>{isIOS ? 'How to Install on iPhone' : 'Install App on Phone'}</span>
+                </button>
+              )}
+            </div>
+
+            {showInstallHelp && (
+              <div className="mt-3 p-3.5 bg-white rounded-2xl border border-emerald-100 text-xs text-slate-700 space-y-1.5 animate-in fade-in duration-150">
+                <p className="font-bold text-slate-900">How to add to your Home Screen:</p>
+                <ol className="list-decimal pl-4 space-y-1 text-slate-600">
+                  <li>In your browser (Safari or Chrome), tap the <strong>Share</strong> or <strong>Menu (⋮)</strong> button.</li>
+                  <li>Select <strong>Add to Home Screen</strong>.</li>
+                  <li>Tap <strong>Add</strong> to put the StudentPlug icon with your other phone apps.</li>
+                </ol>
+              </div>
+            )}
           </div>
 
           {/* Legal Compliance & Policies */}

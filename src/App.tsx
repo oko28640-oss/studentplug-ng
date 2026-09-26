@@ -26,6 +26,7 @@ import { SellerProfileModal } from './components/SellerProfileModal';
 import { NotificationsModal } from './components/NotificationsModal';
 import { LegalDocsModal } from './components/LegalDocsModal';
 import { AccountDeletionModal } from './components/AccountDeletionModal';
+import { PWAInstallBanner } from './components/PWAInstallBanner';
 import { Product } from './types';
 
 const MainLayout: React.FC = () => {
@@ -110,6 +111,9 @@ const MainLayout: React.FC = () => {
           <span>{toastMessage}</span>
         </div>
       )}
+
+      {/* PWA Install Banner */}
+      <PWAInstallBanner />
 
       {/* Top Header */}
       <Header
